@@ -1,15 +1,12 @@
 #Common propeties
 
 server:
-  port: 8761
+  port: 9001
 
 spring:
  application:
-   name: EUREKA-DISCOVERY-SERVER
-eureka:
- client:
-   register-with-eureka: false
-   fetch-registry: false
+   name: GATEWAY_SERVICES
+
 
 management:
  endpoints:
