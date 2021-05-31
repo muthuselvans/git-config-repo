@@ -10,6 +10,10 @@ eureka:
 
 #******************************Configure DataBase Connection****************
 spring:
+  application:
+    name: motorinsuraceservice
+
+
   datasource:
     url: jdbc:oracle:thin:@localhost:1522:xe
     username: SYSTEM
