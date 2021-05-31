@@ -1,0 +1,43 @@
+server:
+   port: 9003
+   tomcat: 
+     max-threads: 30
+
+eureka:
+  client:
+    serviceUrl:
+     defaultZone: http://localhost:8761/eureka/
+
+#******************************Configure DataBase Connection****************
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1522:xe
+    username: SYSTEM
+    password: SYSTEM
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    max-idle: 7
+    max-active: 15
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    show-sql: true
+    hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  cloud:
+    gateway:
+      httpclient:
+        ssl:
+          useInsecureTrustManager: true
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: MOTOR-INSURANCE-SERVICE
+          uri: http://localhost:9001/options   #lb://MOTOR-INSURANCE-SERVICE
+          predicates:
+            - Path=/options/**
+
+management:
+  endpoints:
+    web.exposure.include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
